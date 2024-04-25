@@ -10,9 +10,27 @@
     <script>
         const root = document.getElementById("root");
         const myElement = React.createElement(
-            "span",
-            {id: "my-span", style: {color: "red"}},
-            "Hello I'm a span");
-        ReactDOM.render(myElement, root)
+            "h3",
+            {
+                id: "my-h3-element",
+                style: {
+                    color: "red",
+                },
+                onMouseEnter: () => console.log("mouse enter")
+            },
+            "Hello I'm a span"
+        );
+        const btn = React.createElement(
+            "button",
+            {
+                onClick: () => console.log("i'm clicked"),
+                style: {
+                    backgroundColor: "tomato",
+                }
+            },
+            "Click me"
+        );
+        const container = React.createElement("div", null, [myElement, btn]);
+        ReactDOM.render(container, root);
     </script>
 </html>
