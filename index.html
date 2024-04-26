@@ -10,13 +10,22 @@
     <!-- 바벨 임포트 -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel"> // 바벨을 사용한다고 명시
+    // 리액트를 사용하는 별로 좋지 않은 방식
         const root = document.getElementById("root");
+        let counter = 0;
+        function countUp() {
+            counter = counter + 1;
+            render();   // 숫자가 올라갈 때마다 다시 렌더링
+        }
+        function render() {
+            ReactDOM.render(<Container />, root);
+        }
         const Container = () => (
             <div>
-                <h3>Total clicks: 0</h3>
-                <button>Click me</button>
+                <h3>Total clicks: {counter}</h3>
+                <button onClick={countUp}>Click me</button>
             </div>
         );
-        ReactDOM.render(<Container />, root);
+        render();
     </script>
 </html>
