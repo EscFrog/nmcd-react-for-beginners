@@ -1,24 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <body>
-        <div id="root"></div>
-    </body>
-    <!-- 웹사이트를 인터랙티브 하게 만들어주는 react 라이브러리 임포트-->
-    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-    <!-- react 요소를 html에 추가할 수 있도록 하는 react dom 라이브러리 임포트 -->
-    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-    <!-- 바벨 임포트 -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script type="text/babel">
-        function App() {
-            return (
-                <div>
-                    <h1>Super Converter</h1>
-                </div>
-            );
-        }
-        
-        const root = document.getElementById("root");
-        ReactDOM.render(<App />, root);
-    </script>
+  <body>
+    <div id="root"></div>
+  </body>
+  <!-- 웹사이트를 인터랙티브 하게 만들어주는 react 라이브러리 임포트-->
+  <script
+    crossorigin
+    src="https://unpkg.com/react@18/umd/react.production.min.js"
+  ></script>
+  <!-- react 요소를 html에 추가할 수 있도록 하는 react dom 라이브러리 임포트 -->
+  <script
+    crossorigin
+    src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+  ></script>
+  <!-- 바벨 임포트 -->
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script type="text/babel">
+    function App() {
+      const [state_minutes, modifier_setMinutes] = React.useState();
+
+      const onChange_handler = (event) => {
+        modifier_setMinutes(event.target.value);
+      };
+
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <label htmlFor="minutes">Minutes</label>
+          <input
+            value={state_minutes}
+            id="minutes"
+            placeholder="Minutes"
+            type="number"
+            onChange={onChange_handler}
+          />
+          <h4>You want to convert {state_minutes}</h4>
+          <label htmlFor="hours">Hours</label>
+          <input id="hours" placeholder="Hours" type="number" />
+        </div>
+      );
+    }
+
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);
+  </script>
 </html>
