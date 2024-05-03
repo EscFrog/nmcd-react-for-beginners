@@ -17,26 +17,37 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     function App() {
-      const [state_minutes, modifier_setMinutes] = React.useState();
+      const [state_minutes, modifier_setMinutes] = React.useState(0);
 
       const onChange_handler = (event) => {
         modifier_setMinutes(event.target.value);
       };
 
+      const reset_state = () => modifier_setMinutes(0);
+
       return (
         <div>
           <h1>Super Converter</h1>
-          <label htmlFor="minutes">Minutes</label>
-          <input
-            value={state_minutes}
-            id="minutes"
-            placeholder="Minutes"
-            type="number"
-            onChange={onChange_handler}
-          />
-          <h4>You want to convert {state_minutes}</h4>
-          <label htmlFor="hours">Hours</label>
-          <input id="hours" placeholder="Hours" type="number" />
+          <div>
+            <label htmlFor="minutes">Minutes</label>
+            <input
+              value={state_minutes}
+              id="minutes"
+              placeholder="Minutes"
+              type="number"
+              onChange={onChange_handler}
+            />
+          </div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={Math.floor(state_minutes / 60)}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+            />
+          </div>
+          <button onClick={reset_state}>Reset</button>
         </div>
       );
     }
