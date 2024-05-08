@@ -25,7 +25,7 @@
 
       const reset_state = () => modifier_setAmount(0);
 
-      const onFlip = () => {
+      const onFlip_handler = () => {
         reset_state();
         modifier_setFlipped((current) => !current);
       };
@@ -58,7 +58,7 @@
             />
           </div>
           <button onClick={reset_state}>Reset</button>
-          <button onClick={onFlip}>Flip</button>
+          <button onClick={onFlip_handler}>Flip</button>
         </div>
       );
     }
