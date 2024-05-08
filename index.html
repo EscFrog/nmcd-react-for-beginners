@@ -17,13 +17,13 @@
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     function App() {
-      const [state_amount, modifier_setAmount] = React.useState(0);
+      const [state_amount, modifier_setAmount] = React.useState("");
       const [state_inverted, modifier_setInverted] = React.useState(false);
       const onChange_handler = (event) => {
         modifier_setAmount(event.target.value);
       };
 
-      const reset_state = () => modifier_setAmount(0);
+      const reset_state = () => modifier_setAmount("");
 
       const onFlip_handler = () => {
         reset_state();
@@ -58,7 +58,9 @@
             />
           </div>
           <button onClick={reset_state}>Reset</button>
-          <button onClick={onFlip_handler}>Flip</button>
+          <button onClick={onFlip_handler}>
+            {state_inverted ? "Turn back" : "Invert"}
+          </button>
         </div>
       );
     }
