@@ -18,7 +18,7 @@
   <script type="text/babel">
     function App() {
       const [state_amount, modifier_setAmount] = React.useState(0);
-      const [state_flipped, modifier_setFlipped] = React.useState(false);
+      const [state_inverted, modifier_setInverted] = React.useState(false);
       const onChange_handler = (event) => {
         modifier_setAmount(event.target.value);
       };
@@ -27,7 +27,7 @@
 
       const onFlip_handler = () => {
         reset_state();
-        modifier_setFlipped((current) => !current);
+        modifier_setInverted((current) => !current);
       };
 
       return (
@@ -36,25 +36,25 @@
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
-              value={state_flipped ? state_amount * 60 : state_amount}
+              value={state_inverted ? state_amount * 60 : state_amount}
               id="minutes"
               placeholder="Minutes"
               type="number"
               onChange={onChange_handler}
-              disabled={state_flipped}
+              disabled={state_inverted}
             />
           </div>
           <div>
             <label htmlFor="hours">Hours</label>
             <input
               value={
-                state_flipped ? state_amount : Math.floor(state_amount / 60)
+                state_inverted ? state_amount : Math.floor(state_amount / 60)
               }
               id="hours"
               placeholder="Hours"
               type="number"
               onChange={onChange_handler}
-              disabled={!state_flipped}
+              disabled={!state_inverted}
             />
           </div>
           <button onClick={reset_state}>Reset</button>
