@@ -16,7 +16,7 @@
   <!-- 바벨 임포트 -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
-    function App() {
+    function MinutesToHours() {
       const [state_amount, modifier_setAmount] = React.useState("");
       const [state_inverted, modifier_setInverted] = React.useState(false);
       const onChange_handler = (event) => {
@@ -32,7 +32,6 @@
 
       return (
         <div>
-          <h1>Super Converter</h1>
           <div>
             <label htmlFor="minutes">Minutes</label>
             <input
@@ -64,7 +63,30 @@
         </div>
       );
     }
-
+    function KmToMiles() {
+      // 작성할 것
+      return <h3>KM 2 M</h3>;
+    }
+    function App() {
+      const [state_index, modifier_setIndex] = React.useState("default");
+      const onSelectHandler = (event) => {
+        modifier_setIndex(event.target.value);
+      };
+      return (
+        <div>
+          <h1>Super Converter</h1>
+          <select value={state_index} onChange={onSelectHandler}>
+            <option value="default">Select your units</option>
+            <option value="minHour">Minute & Hours</option>
+            <option value="kmMile">Km & Miles</option>
+          </select>
+          <hr />
+          {state_index === "default" ? "Please select your units" : null}
+          {state_index === "minHour" ? <MinutesToHours /> : null}
+          {state_index === "kmMile" ? <KmToMiles /> : null}
+        </div>
+      );
+    }
     const root = document.getElementById("root");
     ReactDOM.render(<App />, root);
   </script>
