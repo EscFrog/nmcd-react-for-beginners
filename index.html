@@ -64,8 +64,57 @@
       );
     }
     function KmToMiles() {
-      // 작성할 것
-      return <h3>KM 2 M</h3>;
+      const [state_length, modifier_setLength] = React.useState("");
+      const [state_inverted, modifier_setInverted] = React.useState(false);
+      const onChange_handler = (event) => {
+        modifier_setLength(event.target.value);
+      };
+
+      const reset_state = () => modifier_setLength("");
+
+      const onFlip_handler = () => {
+        reset_state();
+        modifier_setInverted((current) => !current);
+      };
+
+      return (
+        <div>
+          <div>
+            <label htmlFor="kilometer">Kilometer</label>
+            <input
+              value={
+                state_inverted
+                  ? Math.round(state_length * 1.609 * 1000) / 1000
+                  : state_length
+              }
+              id="kilometer"
+              placeholder="Km"
+              type="number"
+              onChange={onChange_handler}
+              disabled={state_inverted}
+            />
+          </div>
+          <div>
+            <label htmlFor="mile">Mile</label>
+            <input
+              value={
+                state_inverted
+                  ? state_length
+                  : Math.round((state_length / 1.609) * 1000) / 1000
+              }
+              id="mile"
+              placeholder="Mile"
+              type="number"
+              onChange={onChange_handler}
+              disabled={!state_inverted}
+            />
+          </div>
+          <button onClick={reset_state}>Reset</button>
+          <button onClick={onFlip_handler}>
+            {state_inverted ? "Turn back" : "Invert"}
+          </button>
+        </div>
+      );
     }
     function App() {
       const [state_index, modifier_setIndex] = React.useState("default");
