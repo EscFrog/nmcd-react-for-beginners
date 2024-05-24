@@ -6,18 +6,20 @@
   <!-- 웹사이트를 인터랙티브 하게 만들어주는 react 라이브러리 임포트-->
   <script
     crossorigin
-    src="https://unpkg.com/react@18/umd/react.production.min.js"
+    src="https://unpkg.com/react@17.0.2/umd/react.development.js"
   ></script>
   <!-- react 요소를 html에 추가할 수 있도록 하는 react dom 라이브러리 임포트 -->
   <script
     crossorigin
-    src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"
+    src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.development.js"
   ></script>
+  <!-- prop의 자료형을 체크해주는 prop-type 패키지 임포트 -->
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <!-- 바벨 임포트 -->
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
     // 이 부분은 shortcut. 원래는 props.frog임.
-    function Btn({ text, prob_onClick }) {
+    function Btn({ text, prob_onClick, fontSize = 24 }) {
       return (
         <button
           onClick={prob_onClick}
@@ -27,21 +29,28 @@
             padding: "10px 20px",
             border: 0,
             borderRadius: 10,
+            fontSize,
           }}
         >
           {text}
         </button>
       );
     }
-    // 부모 컴포넌트에 속한 스테이트가 바뀌면 모든 자식 컴포넌트를 다시 렌더링하는데, React.memo()를 사용하면 자식 컴포넌트 중에서도 스테이트가 변경한 녀석만 다시 렌더링한다.
+    // 부모 컴포넌트에 속한 스테이트가 바뀌면 모든 자식 컴포넌트를 다시 렌더링하는데
+    // React.memo()를 사용하면 자식 컴포넌트 중에서도 prob이 바뀐 녀석만 다시 렌더링한다.
     const MemorizedBtn = React.memo(Btn);
+
+    Btn.propTypes = {
+      text: PropTypes.string.isRequired,
+      fontSize: PropTypes.number,
+    };
 
     function App() {
       const [value, setValue] = React.useState("Save Changes");
       const changeValue = () => setValue("Revert Changes");
       return (
         <div>
-          <MemorizedBtn text={value} prob_onClick={changeValue} />
+          <MemorizedBtn text={value} prob_onClick={changeValue} fontSize={18} />
           <MemorizedBtn text="Continue" />
         </div>
       );
