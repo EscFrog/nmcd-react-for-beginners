@@ -63,6 +63,53 @@
         </div>
       );
     }
+    function HoursToDays() {
+      const [state_amount, modifier_setAmount] = React.useState("");
+      const [state_inverted, modifier_setInverted] = React.useState(false);
+      const onChange_handler = (event) => {
+        modifier_setAmount(event.target.value);
+      };
+
+      const reset_state = () => modifier_setAmount("");
+
+      const onFlip_handler = () => {
+        reset_state();
+        modifier_setInverted((current) => !current);
+      };
+
+      return (
+        <div>
+          <div>
+            <label htmlFor="hours">Hours</label>
+            <input
+              value={state_inverted ? state_amount * 24 : state_amount}
+              id="hours"
+              placeholder="Hours"
+              type="number"
+              onChange={onChange_handler}
+              disabled={state_inverted}
+            />
+          </div>
+          <div>
+            <label htmlFor="days">Days</label>
+            <input
+              value={
+                state_inverted ? state_amount : Math.floor(state_amount / 24)
+              }
+              id="days"
+              placeholder="Days"
+              type="number"
+              onChange={onChange_handler}
+              disabled={!state_inverted}
+            />
+          </div>
+          <button onClick={reset_state}>Reset</button>
+          <button onClick={onFlip_handler}>
+            {state_inverted ? "Turn back" : "Invert"}
+          </button>
+        </div>
+      );
+    }
     function KmToMiles() {
       const [state_length, modifier_setLength] = React.useState("");
       const [state_inverted, modifier_setInverted] = React.useState(false);
@@ -126,12 +173,14 @@
           <h1>Super Converter</h1>
           <select value={state_index} onChange={onSelectHandler}>
             <option value="default">Select your units</option>
-            <option value="minHour">Minute & Hours</option>
-            <option value="kmMile">Km & Miles</option>
+            <option value="minHour">Minute to Hours</option>
+            <option value="hourDays">Hours to Days</option>
+            <option value="kmMile">Km to Miles</option>
           </select>
           <hr />
           {state_index === "default" ? "Please select your units" : null}
           {state_index === "minHour" ? <MinutesToHours /> : null}
+          {state_index === "hourDays" ? <HoursToDays /> : null}
           {state_index === "kmMile" ? <KmToMiles /> : null}
         </div>
       );
